@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.codose.travelmantics_andela.views.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.codose.travelmantics_andela.views.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newTravelFragment"
+        android:name="com.codose.travelmantics_andela.views.main.NewTravelFragment"
+        android:label="fragment_new_travel"
+        tools:layout="@layout/fragment_new_travel" >
+        <argument
+            android:name="travelmantic"
+            app:argType="com.codose.travelmantics_andela.models.TravelMantic"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/travelDetailsFragment"
+        android:name="com.codose.travelmantics_andela.views.main.TravelDetailsFragment"
+        android:label="fragment_travel_details"
+        tools:layout="@layout/fragment_travel_details" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.codose.travelmantics_andela.views.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_newTravelFragment"
+            app:destination="@id/newTravelFragment" />
+    </fragment>
+</navigation>

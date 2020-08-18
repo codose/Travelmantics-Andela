@@ -9,6 +9,7 @@ import com.codose.travelmantics_andela.R
 
 class NewTravelFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -16,4 +17,5 @@ class NewTravelFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_new_travel, container, false)
     }
+
 }
