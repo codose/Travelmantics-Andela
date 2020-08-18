@@ -1,5 +1,8 @@
 package com.codose.travelmantics_andela.repository
 
+import android.content.Context
+import android.net.Uri
+import androidx.core.net.toFile
 import com.codose.travelmantics_andela.models.TravelMantic
 import com.codose.travelmantics_andela.models.User
 import com.codose.travelmantics_andela.utils.Resource
@@ -19,7 +22,7 @@ class FirebaseRepository {
     //This is where all Firebase calls are made
     val auth = FirebaseAuth.getInstance()
     val database = Firebase.firestore
-    val storage = Firebase.storage
+    val storage = Firebase.storage.reference
 
     suspend fun registerUser(email : String, password : String, fullName : String) : Resource<String> {
         return try{
@@ -32,9 +35,19 @@ class FirebaseRepository {
         }
     }
 
+    suspend fun uploadImage(uri: Uri) : Resource<String>{
+        return try {
+            val uploadTask = storage.child("travelPhotos/${auth.currentUser?.uid}${System.currentTimeMillis()}.jpg").putFile(uri)
+            val downloadUrl = uploadTask.await().storage.downloadUrl.await()
+            Resource.Success(downloadUrl.toString())
+        }catch (e : Exception){
+            Resource.Failure(e.message!!)
+        }
+    }
+
     suspend fun saveUser(user : User) : Resource<String>{
         return try{
-            val result = database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Profile").document(auth.currentUser!!.uid).set(user)
+            database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Profile").document(auth.currentUser!!.uid).set(user).await()
             Resource.Success("Update Successful")
         }catch (e : Exception){
             Resource.Failure(e.message!!)
@@ -45,7 +58,7 @@ class FirebaseRepository {
         return try{
             val id = database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Travel Details").document().id
             travel.id = id
-            database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Travel Details").document(id).set(travel)
+            database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Travel Details").document(id).set(travel).await()
             Resource.Success("Update Successful")
         }catch (e : Exception){
             Resource.Failure(e.message!!)
@@ -54,7 +67,7 @@ class FirebaseRepository {
 
     suspend fun updateTravelMantics(travel : TravelMantic) : Resource<String>{
         return try{
-            database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Travel Details").document(travel.id).set(travel)
+            database.collection("Travelmantic").document(auth.currentUser!!.uid).collection("Travel Details").document(travel.id).set(travel).await()
             Resource.Success("Update Successful")
         }catch (e : Exception){
             Resource.Failure(e.message!!)

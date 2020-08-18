@@ -1,5 +1,6 @@
 package com.codose.travelmantics_andela.repository
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +15,7 @@ class MainViewModel : ViewModel(){
     val login = MutableLiveData<Resource<String>>()
     val travelMantic = MutableLiveData<Resource<String>>()
     val allTravels = MutableLiveData<Resource<ArrayList<TravelMantic>>>()
-
+    val uploadImage = MutableLiveData<Resource<String>>()
 
 
     fun loginUser(email : String, password : String){
@@ -53,6 +54,16 @@ class MainViewModel : ViewModel(){
             withContext(Dispatchers.IO){
                 val data = repository.updateTravelMantics(travel)
                 travelMantic.postValue(data)
+            }
+        }
+    }
+
+    fun uploadImage(uri : Uri){
+        uploadImage.value = Resource.Loading()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                val data = repository.uploadImage(uri)
+                uploadImage.postValue(data)
             }
         }
     }

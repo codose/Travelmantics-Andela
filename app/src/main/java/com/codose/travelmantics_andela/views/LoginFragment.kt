@@ -9,13 +9,14 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.codose.travelmantics_andela.R
 import com.codose.travelmantics_andela.repository.MainViewModel
 import com.codose.travelmantics_andela.utils.Resource
 import com.codose.travelmantics_andela.utils.Utils
 import com.codose.travelmantics_andela.utils.Utils.showToast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
-import okhttp3.internal.Util
 
 class LoginFragment : Fragment() {
     val viewModel by lazy {
@@ -34,8 +35,14 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(FirebaseAuth.getInstance().currentUser != null){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
+        }
         login_button.setOnClickListener {
             loginUser()
+        }
+        login_register_btn.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
         }
         setObservers()
     }
@@ -49,6 +56,7 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     val data = it.data
                     hideProgress()
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
                     data.showToast(requireContext())
                 }
                 is Resource.Failure -> {
