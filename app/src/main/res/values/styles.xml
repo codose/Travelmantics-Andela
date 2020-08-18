@@ -1,0 +1,58 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.CurvedRadius" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">24dp</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="textAllCaps">false</item>
+        <item name="rippleColor">@color/grey</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.CurvedRadius.Outline" parent="Widget.MaterialComponents.Button.CurvedRadius">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
+
+    <style name="TextAppearance.TextRegular" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/lato_regular</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.TextBold" parent="TextAppearance.TextRegular">
+        <item name="android:fontFamily">@font/lato_bold</item>
+    </style>
+
+    <style name="TextAppearance.TextMedium" parent="TextAppearance.TextRegular">
+        <item name="android:fontFamily">@font/lato_medium</item>
+    </style>
+
+    <style name="TextAppearance.TextBlack" parent="TextAppearance.TextRegular">
+        <item name="android:fontFamily">@font/lato_black</item>
+    </style>
+
+    <style name="TextInputLayout.FormEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textAppearance">@style/TextAppearance.TextRegular</item>
+        <item name="errorEnabled">true</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:layout_gravity">top</item>
+        <item name="boxCornerRadiusBottomEnd">24dp</item>
+        <item name="boxCornerRadiusTopStart">24dp</item>
+        <item name="boxCornerRadiusTopEnd">24dp</item>
+        <item name="boxCornerRadiusBottomStart">24dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="boxStrokeColor">@color/edit_color</item>
+        <item name="startIconTint">@color/edit_color</item>
+    </style>
+
+</resources>
