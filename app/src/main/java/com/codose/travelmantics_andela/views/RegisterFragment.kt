@@ -58,7 +58,7 @@ class RegisterFragment : Fragment() {
             register_pass_text_input_layout.error = "Valid Password is required"
             return
         }else{
-            if(register_pass_text_input_edit.text.toString().length >= 8){
+            if(register_pass_text_input_edit.text.toString().length < 8){
                 register_pass_text_input_layout.error = "Valid Password is required"
                 return
             }else{
@@ -70,7 +70,7 @@ class RegisterFragment : Fragment() {
             register_confirm_pass_text_input_layout.error = "Valid Password is required"
             return
         }else{
-            if(register_confirm_pass_text_input_edit.text.toString() == register_pass_text_input_edit.text.toString()){
+            if(register_confirm_pass_text_input_edit.text.toString() != register_pass_text_input_edit.text.toString()){
                 register_confirm_pass_text_input_layout.error = "Passwords does not match"
                 return
             }else{
@@ -93,6 +93,7 @@ class RegisterFragment : Fragment() {
                     data.showToast(requireContext())
                 }
                 is Resource.Failure -> {
+                    it.message.showToast(requireContext())
                     hideProgress()
                 }
             }

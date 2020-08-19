@@ -7,23 +7,32 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:background="@color/grey_trans"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <ImageView
+        android:id="@+id/empty_image"
+        android:layout_width="213dp"
+        android:layout_height="197dp"
+        app:layout_constraintBottom_toBottomOf="@+id/empty_view"
+        app:layout_constraintEnd_toEndOf="@+id/empty_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/empty_view"
+        app:srcCompat="@drawable/ic_empty_cart" />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        android:layout_marginTop="24dp"
+        android:text="No Travel Location Added"
+        android:textAppearance="@style/TextAppearance.TextMedium"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/empty_image" />
 </androidx.constraintlayout.widget.ConstraintLayout>

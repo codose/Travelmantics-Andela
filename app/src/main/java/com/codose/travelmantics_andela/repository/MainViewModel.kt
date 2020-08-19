@@ -15,7 +15,7 @@ class MainViewModel : ViewModel(){
     val login = MutableLiveData<Resource<String>>()
     val travelMantic = MutableLiveData<Resource<String>>()
     val allTravels = MutableLiveData<Resource<ArrayList<TravelMantic>>>()
-    val uploadImage = MutableLiveData<Resource<String>>()
+    val uploadImageObs = MutableLiveData<Resource<String>>()
 
 
     fun loginUser(email : String, password : String){
@@ -59,11 +59,11 @@ class MainViewModel : ViewModel(){
     }
 
     fun uploadImage(uri : Uri){
-        uploadImage.value = Resource.Loading()
+        uploadImageObs.value = Resource.Loading()
         viewModelScope.launch {
             withContext(Dispatchers.IO){
                 val data = repository.uploadImage(uri)
-                uploadImage.postValue(data)
+                uploadImageObs.postValue(data)
             }
         }
     }

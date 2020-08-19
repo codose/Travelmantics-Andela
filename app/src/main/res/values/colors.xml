@@ -14,5 +14,5 @@
     <color name="colorLightGrey">#EAEAEA</color>
     <color name="colorStrokeGrey">#EBF0FF</color>
     <color name="grey">#999999</color>
-    <color name="grey_trans">#F6F6F6</color>
+    <color name="grey_trans">#4FF6F6F6</color>
 </resources>

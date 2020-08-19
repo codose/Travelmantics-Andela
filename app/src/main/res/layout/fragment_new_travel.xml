@@ -17,13 +17,14 @@
             style="@style/Widget.MaterialComponents.Button.CurvedRadius.Outline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/lato_regular"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:minHeight="16dp"
             android:text="Save"
+            app:strokeWidth="1dp"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Location Name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -93,7 +95,8 @@
                 android:layout_height="200dp"
                 android:gravity="start|top"
                 android:hint="Location Description"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="14sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -102,11 +105,12 @@
             android:layout_height="200dp"
             android:layout_marginTop="24dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_user"
+            android:src="@drawable/ic_place"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/save_btn"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            app:layout_constraintTop_toBottomOf="@+id/save_btn" />
 
         <ImageButton
             android:id="@+id/image_select_btn"

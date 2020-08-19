@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,6 +40,9 @@ class NewTravelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = NewTravelFragmentArgs.fromBundle(requireArguments())
+        back_button.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
         image_select_btn.setOnClickListener {
             CropImage.activity()
                 .setAspectRatio(1,1)
@@ -47,12 +52,13 @@ class NewTravelFragment : Fragment() {
         if(args.travelmantic != null){
             add_new_text.text = "Update Location"
             save_btn.text = "Update"
-            imageUrl = travelMantic.imageUrl
             travelMantic = args.travelmantic
+            imageUrl = travelMantic.imageUrl
             travel_name_text_input_edit.setText(travelMantic.placeName)
-            travel_name_text_input_edit.setText(travelMantic.description)
+            travel_description_text_input_edit.setText(travelMantic.description)
             Glide.with(requireContext())
                 .load(travelMantic.imageUrl)
+                .placeholder(R.drawable.ic_place)
                 .into(new_travel_image)
             save_btn.setOnClickListener {
                 updateTravel()
@@ -75,8 +81,8 @@ class NewTravelFragment : Fragment() {
                 is Resource.Success -> {
                     val data = it.data
                     data.showToast(requireContext())
-                    requireActivity().onBackPressed()
                     hideProgress()
+                    requireActivity().onBackPressed()
                 }
                 is Resource.Failure -> {
                     it.message.showToast(requireContext())
@@ -85,7 +91,7 @@ class NewTravelFragment : Fragment() {
             }
         })
 
-        viewModel.uploadImage.observe(viewLifecycleOwner, Observer {
+        viewModel.uploadImageObs.observe(viewLifecycleOwner, Observer {
             when(it){
                 is Resource.Loading -> {
                     showProgress()
@@ -106,11 +112,11 @@ class NewTravelFragment : Fragment() {
     }
 
     private fun hideProgress() {
-
+        travel_progress.visibility = GONE
     }
 
     private fun showProgress() {
-
+        travel_progress.visibility = VISIBLE
     }
 
     private fun updateTravel() {
